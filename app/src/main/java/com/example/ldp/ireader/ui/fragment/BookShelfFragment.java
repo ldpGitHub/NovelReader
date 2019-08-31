@@ -132,8 +132,8 @@ public class BookShelfFragment extends BaseMVPFragment<BookShelfContract.Present
                                 //弹出一个Dialog
                                 AlertDialog tipDialog = new AlertDialog.Builder(getContext())
                                         .setTitle("您的任务正在加载")
-                                        .setMessage("先请暂停任务再进行删除")
-                                        .setPositiveButton("确定", (dialog, which) -> {
+                                        .setMessage("先请暂停任务再进行删除!")
+                                        .setPositiveButton("确定 ", (dialog, which) -> {
                                             dialog.dismiss();
                                         }).create();
                                 tipDialog.show();

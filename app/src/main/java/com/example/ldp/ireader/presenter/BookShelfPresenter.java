@@ -149,9 +149,10 @@ public class BookShelfPresenter extends RxPresenter<BookShelfContract.View>
 //                        showNotification(oldCollBook);
                         updateCategory(oldCollBook);
                         oldCollBook.setUpdated(bookDetailBeanInBiquge.getData().getLastTime());
+
                         if (!oldCollBook.getLastChapter().equals(bookDetailBeanInBiquge.getData().getLastChapter())) {
                             oldCollBook.setLastChapter(bookDetailBeanInBiquge.getData().getLastChapter());
-                            Log.d(TAG,"+更新书籍 "+oldCollBook.getTitle() + oldCollBook.getLastChapter());
+                            Log.d(TAG,"+ 更新书籍  "+oldCollBook.getTitle() + oldCollBook.getLastChapter());
 
                             oldCollBook.setUpdate(true);
 //                            showNotification(oldCollBook);
