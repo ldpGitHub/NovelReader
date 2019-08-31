@@ -63,12 +63,10 @@ public class SystemBarUtils {
     }
 
     public static void showUnStableNavBar(Activity activity){
-        activity.getWindow().setNavigationBarColor( activity.getResources().getColor(R.color.nb_read_menu_bg));
         clearFlag(activity,UNSTABLE_NAV);
     }
 
     public static void hideStableStatusBar(Activity activity){
-        activity.getWindow().setNavigationBarColor( activity.getResources().getColor(R.color.nb_read_menu_bg));
 
         //App全屏，隐藏StatusBar
         setFlag(activity,STABLE_STATUS);
@@ -79,14 +77,12 @@ public class SystemBarUtils {
     }
 
     public static void hideStableNavBar(Activity activity){
-        activity.getWindow().setNavigationBarColor( activity.getResources().getColor(R.color.nb_read_menu_bg));
 
         //App全屏，隐藏StatusBar
         setFlag(activity,STABLE_NAV);
     }
 
     public static void showStableNavBar(Activity activity){
-        activity.getWindow().setNavigationBarColor( activity.getResources().getColor(R.color.nb_read_menu_bg));
 
         clearFlag(activity,STABLE_NAV);
     }
@@ -99,7 +95,6 @@ public class SystemBarUtils {
      * 视图扩充到StatusBar
      */
     public static void expandStatusBar(Activity activity){
-        activity.getWindow().setNavigationBarColor( activity.getResources().getColor(R.color.nb_read_menu_bg));
 
         setFlag(activity, EXPAND_STATUS);
     }
@@ -109,7 +104,6 @@ public class SystemBarUtils {
      * @param activity
      */
     public static void expandNavBar(Activity activity){
-        activity.getWindow().setNavigationBarColor( activity.getResources().getColor(R.color.nb_read_menu_bg));
 
         setFlag(activity, EXPAND_NAV);
     }
@@ -120,7 +114,6 @@ public class SystemBarUtils {
         if (Build.VERSION.SDK_INT >= 21){
             expandStatusBar(activity);
 
-//            activity.getWindow().setNavigationBarColor( activity.getResources().getColor(R.color.nb_read_menu_bg));
         }
         else if (Build.VERSION.SDK_INT >= 19){
             WindowManager.LayoutParams attrs = activity.getWindow().getAttributes();

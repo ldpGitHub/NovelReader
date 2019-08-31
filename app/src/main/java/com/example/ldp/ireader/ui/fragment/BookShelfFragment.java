@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -271,7 +272,9 @@ public class BookShelfFragment extends BaseMVPFragment<BookShelfContract.Present
      * @param collBook
      */
     private void deleteBook(CollBookBean collBook) {
+        Log.d(TAG, "deleteBook: " + collBook + "collBook.isLocal():"+ collBook.isLocal());
         if (collBook.isLocal()) {
+
             View view = LayoutInflater.from(getContext())
                     .inflate(R.layout.dialog_delete, null);
             CheckBox cb = (CheckBox) view.findViewById(R.id.delete_cb_select);
@@ -306,6 +309,7 @@ public class BookShelfFragment extends BaseMVPFragment<BookShelfContract.Present
                     .setNegativeButton(getResources().getString(R.string.nb_common_cancel), null)
                     .show();
         } else {
+            Log.d(TAG, "deleteBook: DeleteTaskEvent" +collBook);
             RxBus.getInstance().post(new DeleteTaskEvent(collBook));
         }
     }
@@ -345,8 +349,9 @@ public class BookShelfFragment extends BaseMVPFragment<BookShelfContract.Present
     @Override
     public void finishUpdate() {
         //重新从数据库中获取数据
-        mCollBookAdapter.refreshItems(BookRepository
-                .getInstance().getCollBooks());
+        getActivity().runOnUiThread(() -> mCollBookAdapter.refreshItems(BookRepository
+                .getInstance().getCollBooks()));
+
     }
 
     @Override

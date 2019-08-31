@@ -148,7 +148,7 @@ public class BookShelfPresenter extends RxPresenter<BookShelfContract.View>
                         //如果是oldBook是update状态，或者newCollBook与oldBook章节数不同
 //                        showNotification(oldCollBook);
                         updateCategory(oldCollBook);
-
+                        oldCollBook.setUpdated(bookDetailBeanInBiquge.getData().getLastTime());
                         if (!oldCollBook.getLastChapter().equals(bookDetailBeanInBiquge.getData().getLastChapter())) {
                             oldCollBook.setLastChapter(bookDetailBeanInBiquge.getData().getLastChapter());
                             Log.d(TAG,"+更新书籍 "+oldCollBook.getTitle() + oldCollBook.getLastChapter());
@@ -177,6 +177,7 @@ public class BookShelfPresenter extends RxPresenter<BookShelfContract.View>
                         BookRepository.getInstance().saveCollBooks(newCollBooksMerge);
 //                                Log.d("+?5缓存", "运行");//
                                 mView.complete();
+                                mView.finishUpdate();
                     }
                 });
 

@@ -320,14 +320,15 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
     }
 
     private void initBottomMenu() {
+        Log.d(TAG, "initBottomMenu: setStableNavBarColor");
         SystemBarUtils.setStableNavBarColor(this,getResources().getColor(R.color.nb_read_menu_bg));
 
         //判断是否全屏
         if (ReadSettingManager.getInstance().isFullScreen()) {
             //还需要设置mBottomMenu的底部高度
-            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLlBottomMenu.getLayoutParams();
-            params.bottomMargin = ScreenUtils.getNavigationBarHeight();
-            mLlBottomMenu.setLayoutParams(params);
+//            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLlBottomMenu.getLayoutParams();
+//            params.bottomMargin = ScreenUtils.getNavigationBarHeight();
+//            mLlBottomMenu.setLayoutParams(params);
         } else {
             //设置mBottomMenu的底部距离
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mLlBottomMenu.getLayoutParams();
@@ -594,9 +595,11 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
         Log.d(TAG, "showSystemBar:");
         //显示
         SystemBarUtils.setStableNavBarColor(this,getResources().getColor(R.color.nb_read_menu_bg));
-        SystemBarUtils.showUnStableStatusBar(this);
+//        SystemBarUtils.showUnStableStatusBar(this);
         if (isFullScreen) {
-            SystemBarUtils.showUnStableNavBar(this);
+//            SystemBarUtils.showUnStableNavBar(this);
+            SystemBarUtils.showStableNavBar(this);
+
             SystemBarUtils.setStableNavBarColor(this,getResources().getColor(R.color.nb_read_menu_bg));
         }
     }
