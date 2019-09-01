@@ -50,7 +50,7 @@ import io.reactivex.disposables.Disposable;
 
 public class BookShelfFragment extends BaseMVPFragment<BookShelfContract.Presenter>
         implements BookShelfContract.View {
-    private static final String TAG = "BookShelfFragment";
+    private static final String TAG = BookShelfFragment.class.getSimpleName();
     @BindView(R.id.book_shelf_rv_content)
     ScrollRefreshRecyclerView mRvContent;
 
@@ -348,6 +348,8 @@ public class BookShelfFragment extends BaseMVPFragment<BookShelfContract.Present
 
     @Override
     public void finishUpdate() {
+        Log.d(TAG, "finishUpdate: " + BookRepository
+                .getInstance().getCollBooks().size());
         //重新从数据库中获取数据
         getActivity().runOnUiThread(() -> mCollBookAdapter.refreshItems(BookRepository
                 .getInstance().getCollBooks()));

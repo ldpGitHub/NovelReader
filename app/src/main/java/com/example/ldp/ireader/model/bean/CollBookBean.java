@@ -227,7 +227,8 @@ public class CollBookBean implements Parcelable{
     }
 
     public String getLastRead() {
-        return StringUtils.convertCC(lastRead, App.getContext());
+        return  lastRead;
+//        return StringUtils.convertCC(lastRead, App.getContext());
     }
 
     public void setLastRead(String lastRead) {

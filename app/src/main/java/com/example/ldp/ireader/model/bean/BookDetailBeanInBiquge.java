@@ -380,7 +380,7 @@ public class BookDetailBeanInBiquge {
 //        bean.setLatelyFollower(getLatelyFollower());
 //        bean.setRetentionRatio(Double.parseDouble(getRetentionRatio()));
         bean.setUpdated(data.getLastTime());
-        bean.setChaptersCount(100);
+        bean.setChaptersCount(3);
         bean.setLastChapter(data.getLastChapter());
         return bean;
     }

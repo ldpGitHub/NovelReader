@@ -136,8 +136,9 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View>
 
     @Override
     public void addToBookShelf(CollBookBean collBookBean) {
-        List<BookChapterBean> bookChapterBeans = new ArrayList<>();
 
+        List<BookChapterBean> bookChapterBeans = new ArrayList<>();
+        Log.d(TAG, "addToBookShelf: " + collBookBean);
         Disposable disposable = RemoteRepository.getInstance()
                 .getChapterListByBiquge(collBookBean.get_id())
                 .subscribeOn(Schedulers.io())
@@ -150,7 +151,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View>
                 .subscribe(new Consumer<BookChapterPackageByBiquge>() {
                     @Override
                     public void accept(BookChapterPackageByBiquge bookChapterPackageByBiquge) throws Exception {
-
+                        Log.d(TAG, "accept:bookChapterPackageByBiquge " + bookChapterPackageByBiquge);
                         List<BookChapterPackageByBiquge.DataBean.ListBeanX.ListBean> listBeans = new ArrayList<>();
                         for (BookChapterPackageByBiquge.DataBean.ListBeanX mlistBeanX : bookChapterPackageByBiquge.getData().getList()) {
                             if (null != mlistBeanX && null != mlistBeanX.getList()) {

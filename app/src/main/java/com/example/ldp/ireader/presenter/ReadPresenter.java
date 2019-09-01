@@ -83,7 +83,7 @@ public class ReadPresenter extends RxPresenter<ReadContract.View>
     public void loadCategory(String bookId) {
         List<BookChapterBean> bookChapterBeans = new ArrayList<>();
         CollBookBean collBookBean = BookRepository.getInstance().getCollBook(bookId);
-        Log.d("+加载章节",collBookBean.getTitle());
+        Log.d("+加载章节",collBookBean+"");
 
         RemoteRepository.getInstance()
                 .getChapterListByBiquge(bookId)

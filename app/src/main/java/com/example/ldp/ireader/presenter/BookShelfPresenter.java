@@ -277,7 +277,7 @@ public class BookShelfPresenter extends RxPresenter<BookShelfContract.View>
                                 }
 
                                 CollBookBean bean = it.next();
-                                bean.setLastRead(StringUtils.
+                                bean.setUpdated(StringUtils.
                                         dateConvert(System.currentTimeMillis(), Constant.FORMAT_BOOK_DATE));
                                 bean.setBookChapters(chapterList);
                             }

@@ -61,6 +61,7 @@ public class BookRepository {
 
     //存储已收藏书籍
     public void saveCollBookWithAsync(CollBookBean bean){
+        Log.d(TAG, "启动异步存储  saveCollBookWithAsync: " + bean);
         //启动异步存储
         mSession.startAsyncSession()
                 .runInTx(
@@ -70,28 +71,43 @@ public class BookRepository {
                                 mSession.getBookChapterBeanDao()
                                         .insertOrReplaceInTx(bean.getBookChapters());
 
-                                Log.d(TAG, "saveCollBookWithAsync: "+"进行存储" +  bean.getBookChapters());
+                                Log.d(TAG, "saveCollBookWithAsync: "+"章节存储  " +  bean.getBookChapters());
                             }
-                            Log.d(TAG, "saveCollBookWithAsync: "+"进行存储" + bean.getAuthor() +bean.getTitle()+bean.getShortIntro());
                             //存储CollBook (确保先后顺序，否则出错)
                             //表示当前CollBook已经阅读
+                            Log.d(TAG, "saveCollBookWithAsync: a");
+
                             bean.setIsUpdate(false);
-                            bean.setLastRead(StringUtils.
-                                    dateConvert(System.currentTimeMillis(), Constant.FORMAT_BOOK_DATE));
+                            Log.d(TAG, "saveCollBookWithAsync: b");
+
+                            if (null == bean.getLastRead()||"".equals(bean.getLastRead())||"null".equals(bean.getLastRead()))
+                            {
+                                Log.d(TAG, "saveCollBookWithAsync: c");
+
+                                bean.setLastRead(StringUtils.
+                                        dateConvert(System.currentTimeMillis(), Constant.FORMAT_BOOK_DATE));
+                                Log.d(TAG, "saveCollBookWithAsync: d");
+
+                            }
+
+//                            bean.setLastRead(StringUtils.
+//                                        dateConvert(System.currentTimeMillis(), Constant.FORMAT_BOOK_DATE));
+//                            Log.d(TAG, "saveCollBookWithAsync: 0");
                             //直接更新
                             CollBookBean collBookBeanOrigin = BookRepository.getInstance().getCollBook(bean.get_id());
                             if(null != collBookBeanOrigin) {
                                 bean.setBookIdInBiquge(collBookBeanOrigin.getBookIdInBiquge());
                             }
+                            Log.d(TAG, "saveCollBookWithAsync: 1");
                             BookRepository.getInstance().saveCollBook(bean);
 //                            mCollBookDao.insertOrReplaceInTx(bean);
-                            Log.d(TAG, "saveCollBookWithAsync: "+"存储完成" + bean.getAuthor() +bean.getTitle()+bean.getShortIntro());
+                            Log.d(TAG, "saveCollBookWithAsync: "+"存储完成      " + bean.getAuthor() +bean.getTitle()+bean.getShortIntro());
                             List<CollBookBean> collBooksTest = mCollBookDao
                                     .queryBuilder()
                                     .orderDesc(CollBookBeanDao.Properties.LastRead)
                                     .list();
                             for (CollBookBean collBookBean: collBooksTest ) {
-                                Log.d(TAG, "+存储后: "+"进行存储" +   collBookBean.getTitle());
+                                Log.d(TAG, "+saveCollBookWithAsync存储后: "+"进行存储" +   collBookBean.getTitle());
 
 
                             }
@@ -126,12 +142,22 @@ public class BookRepository {
     }
 
     public void saveCollBook(CollBookBean bean){
-        Log.d(TAG, "22saveCollBookWithAsync : "+"进行存储" +  bean.toString());
+        Log.d(TAG, "saveCollBook : "+"进行存储 " +  bean.toString());
         CollBookBean collBookBeanOrigin = BookRepository.getInstance().getCollBook(bean.get_id());
         if(null != collBookBeanOrigin) {
             bean.setBookIdInBiquge(collBookBeanOrigin.getBookIdInBiquge());
         }
+        mSession.clear();
+        Log.d(TAG, "2saveCollBook : "+"进行存储" +  bean.toString());
+
         mCollBookDao.insertOrReplace(bean);
+        Log.d(TAG, "3saveCollBook : "+"进行存储" +  bean.toString());
+
+        for (int i = 0; i <800 ; i++) {
+         i++;
+        }
+        Log.d(TAG, "进行存储后结果saveCollBook : "+"" +   mCollBookDao.queryBuilder().list());
+
     }
 //    public void saveBook(BookDetailBeanInBiquge bean){
 //        Log.d(TAG, "22saveCollBookWithAsync : "+"进行存储" +  bean.toString());
@@ -143,7 +169,7 @@ public class BookRepository {
 //    }
 
     public void saveCollBooks(List<CollBookBean> beans){
-        Log.d(TAG, "33saveCollBookWithAsync : "+"进行存储" +  beans.toString());
+        Log.d(TAG, "saveCollBooks : "+"进行存储" +  beans.toString());
         for (CollBookBean bookBean: beans) {
             CollBookBean collBookBeanOrigin = BookRepository.getInstance().getCollBook(bookBean.get_id());
             if(null != collBookBeanOrigin) {
@@ -210,6 +236,13 @@ public class BookRepository {
 
 
     public  List<CollBookBean> getCollBooks(){
+        List<CollBookBean> mTemp = mCollBookDao
+                .queryBuilder()
+                .orderDesc(CollBookBeanDao.Properties.LastRead)
+                .list();
+        for (CollBookBean item : mTemp) {
+            Log.d(TAG, "getCollBooksitem: " +item.getTitle() + item.getLastRead() );
+        }
         return mCollBookDao
                 .queryBuilder()
                 .orderDesc(CollBookBeanDao.Properties.LastRead)
@@ -220,16 +253,13 @@ public class BookRepository {
 
     //获取书籍列表
     public Single<List<BookChapterBean>> getBookChaptersInRx(String bookId){
-        return Single.create(new SingleOnSubscribe<List<BookChapterBean>>() {
-            @Override
-            public void subscribe(SingleEmitter<List<BookChapterBean>> e) throws Exception {
-                List<BookChapterBean> beans = mSession
-                        .getBookChapterBeanDao()
-                        .queryBuilder()
-                        .where(BookChapterBeanDao.Properties.BookId.eq(bookId))
-                        .list();
-                e.onSuccess(beans);
-            }
+        return Single.create(e -> {
+            List<BookChapterBean> beans = mSession
+                    .getBookChapterBeanDao()
+                    .queryBuilder()
+                    .where(BookChapterBeanDao.Properties.BookId.eq(bookId))
+                    .list();
+            e.onSuccess(beans);
         });
     }
 
