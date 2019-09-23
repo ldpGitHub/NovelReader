@@ -1,6 +1,7 @@
 package com.example.ldp.ireader.presenter.contract;
 
 import com.example.ldp.ireader.model.bean.BookChapterBean;
+import com.example.ldp.ireader.model.bean.CollBookBean;
 import com.example.ldp.ireader.ui.base.BaseContract;
 import com.example.ldp.ireader.widget.page.TxtChapter;
 
@@ -18,7 +19,7 @@ public interface ReadContract extends BaseContract{
     }
 
     interface Presenter extends BaseContract.BasePresenter<View>{
-        void loadCategory(String bookId);
+        void loadCategory(CollBookBean collBookBean);
         void loadChapter(String bookId,List<TxtChapter> bookChapterList);
         void loadCategoryInBiquge(String bookId);
 

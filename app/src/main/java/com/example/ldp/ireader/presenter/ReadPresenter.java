@@ -80,13 +80,13 @@ public class ReadPresenter extends RxPresenter<ReadContract.View>
     List<BookChapterBean> beansInZhuishu = new ArrayList<>();
 
     @Override
-    public void loadCategory(String bookId) {
+    public void loadCategory(CollBookBean collBookBean) {
         List<BookChapterBean> bookChapterBeans = new ArrayList<>();
-        CollBookBean collBookBean = BookRepository.getInstance().getCollBook(bookId);
+//        CollBookBean collBookBean = BookRepository.getInstance().getCollBook(bookId);
         Log.d("+加载章节",collBookBean+"");
 
         RemoteRepository.getInstance()
-                .getChapterListByBiquge(bookId)
+                .getChapterListByBiquge(collBookBean.get_id())
                 .compose(RxUtils::toSimpleSingle)
                 .subscribe(new Consumer<BookChapterPackageByBiquge>() {
                     @Override
@@ -122,7 +122,7 @@ public class ReadPresenter extends RxPresenter<ReadContract.View>
 //                        mView.succeedToBookShelf();
 //                        BookRepository.getInstance().saveChapterInfo(
 //                                        bookId, title, chapterInfoBean.getBody());
-                        mView.showCategory(bookChapterBeans,bookId,true);
+                        mView.showCategory(bookChapterBeans,collBookBean.get_id(),true);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

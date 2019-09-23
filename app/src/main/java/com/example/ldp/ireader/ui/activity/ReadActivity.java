@@ -676,7 +676,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
 //                                if (mCollBook.isUpdate() && !mCollBook.isLocal()) {
 //                                    mPresenter.loadCategory(mBookId);
 //                                }
-                                mPresenter.loadCategory(mBookId);
+                                mPresenter.loadCategory(mCollBook);
                                     LogUtils.e(throwable);
                                 }
                             }
@@ -684,7 +684,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
             addDisposable(disposable);
         } else {
             // 从网络中获取目录
-            mPresenter.loadCategory(mBookId);
+            mPresenter.loadCategory(mCollBook);
         }
     }
 

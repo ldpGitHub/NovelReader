@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -154,40 +155,12 @@ public class BookDetailActivity extends BaseMVPActivity<BookDetailContract.Prese
                 }
         );
 
-//        mTvChase.setOnClickListener(
-//                (V) -> {
-//                    //点击存储
-//                    if (isCollected) {
-//                        //放弃点击
-//                        BookRepository.getInstance()
-//                                .deleteCollBookInRx(mCollBookBean);
-//
-//                        mTvChase.setText(getResources().getString(R.string.nb_book_detail_chase_update));
-//
-//                        //修改背景
-//                        Drawable drawable = getResources().getDrawable(R.drawable.selector_btn_book_list);
-//                        mTvChase.setBackground(drawable);
-//                        //设置图片
-//                        mTvChase.setCompoundDrawables(ContextCompat.getDrawable(this, R.drawable.ic_book_list_add), null,
-//                                null, null);
-//
-//                        isCollected = false;
-//                    } else {
-//                        mPresenter.addToBookShelf(mCollBookBean);
-//                        mTvChase.setText(getResources().getString(R.string.nb_book_detail_give_up));
-//
-//                        //修改背景
-//                        Drawable drawable = getResources().getDrawable(R.drawable.shape_common_gray_corner);
-//                        mTvChase.setBackground(drawable);
-//                        //设置图片
-//                        mTvChase.setCompoundDrawables(ContextCompat.getDrawable(this, R.drawable.ic_book_list_delete), null,
-//                                null, null);
-//
-//                        isCollected = true;
-//                    }
-//                }
-//        );
-
+        mTvChase.setOnClickListener(
+                (V) -> {
+                    Log.d(TAG, "initClick: mTvChase");
+//                    mAvChase.performClick();
+                }
+        );
         mAvChase.setOnClickListener(
                 (V) -> {
                     //点击存储
@@ -218,6 +191,7 @@ public class BookDetailActivity extends BaseMVPActivity<BookDetailContract.Prese
                     }
                 }
         );
+
 
         mTvRead.setOnClickListener(
                 (v) -> startActivityForResult(new Intent(this, ReadActivity.class)

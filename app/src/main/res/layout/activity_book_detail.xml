@@ -138,7 +138,6 @@
 								android:layout_weight="1"
                                 android:padding="10dp"
 								android:layout_gravity="bottom|start"
-
 								app:lottie_autoPlay="false"
 								app:lottie_fileName="addToBookShelf.json"
 								app:lottie_loop="false" />
@@ -330,6 +329,7 @@
 				</LinearLayout>
 				
 				<android.support.v7.widget.RecyclerView
+					android:visibility="gone"
 					android:id="@+id/book_detail_rv_hot_comment"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -387,6 +387,7 @@
 					android:textSize="15sp"/>
 				
 				<android.support.v7.widget.RecyclerView
+					android:visibility="gone"
 					android:id="@+id/book_detail_rv_recommend_book_list"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
