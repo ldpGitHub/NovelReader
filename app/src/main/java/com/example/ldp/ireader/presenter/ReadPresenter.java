@@ -133,6 +133,7 @@ public class ReadPresenter extends RxPresenter<ReadContract.View>
 
     }
 
+    @Deprecated
     @Override
     public void loadCategoryInBiquge(String bookId) {
 
