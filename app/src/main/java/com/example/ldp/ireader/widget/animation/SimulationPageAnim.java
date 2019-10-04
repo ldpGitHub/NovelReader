@@ -18,7 +18,7 @@ import android.view.View;
  */
 
 public class SimulationPageAnim extends HorizonPageAnim{
-    private static final String TAG = "SimulationPageAnim";
+    private static final String TAG = SimulationPageAnim.class.getSimpleName();
 
     private int mCornerX = 1; // 拖拽点对应的页脚
     private int mCornerY = 1;

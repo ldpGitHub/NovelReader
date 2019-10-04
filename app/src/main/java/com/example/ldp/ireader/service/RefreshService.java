@@ -94,7 +94,7 @@ public class RefreshService extends Service {
         localWakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, this.getClass().getCanonicalName());
         if(!localWakeLock.isHeld()){
             ;// 申请设备电源锁
-            localWakeLock.acquire(24*60*60*1000L /*10 minutes*/);
+            localWakeLock.acquire(24*60*60*1000L /**/);
         }
         if (!RefreshJobService.isServiceRunning()) {
             Log.d(TAG,"+RefreshJobService未启动");
@@ -232,7 +232,7 @@ public class RefreshService extends Service {
                         }
 
                         //如果是oldBook是update状态，或者newCollBook与oldBook章节数不同
-                        showNotification(oldCollBook);
+//                        showNotification(oldCollBook);
                         updateCategory(oldCollBook);
 
                         if (!oldCollBook.getLastChapter().equals(bookDetailBeanInBiquge.getData().getLastChapter())) {
