@@ -70,10 +70,10 @@ public class SimulationPageAnim extends HorizonPageAnim{
         createDrawable();
 
         ColorMatrix cm = new ColorMatrix();//设置颜色数组
-        float array[] = { 1, 0, 0, 0, 0,
+        float array[] = {1, 0, 0, 0, 0,
                 0, 1, 0, 0, 0,
-                0, 0,1, 0, 0,
-                0, 0, 0, 1, 0 };
+                0, 0, 1, 0, 0,
+                0, 0, 0, 1, 0};
         cm.set(array);
         mColorMatrixFilter = new ColorMatrixColorFilter(cm);
         mMatrix = new Matrix();
