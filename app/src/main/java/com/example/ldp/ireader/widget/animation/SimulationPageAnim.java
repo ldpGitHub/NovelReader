@@ -309,8 +309,10 @@ public class SimulationPageAnim extends HorizonPageAnim{
         mMatrixArray[1] = 2 * f8 * f9;
         mMatrixArray[3] = mMatrixArray[1];
         mMatrixArray[4] = 1 - 2 * f8 * f8;
+
         mMatrix.reset();
         mMatrix.setValues(mMatrixArray);
+
         mMatrix.preTranslate(-mBezierControl1.x, -mBezierControl1.y);
         mMatrix.postTranslate(mBezierControl1.x, mBezierControl1.y);
         canvas.drawBitmap(bitmap, mMatrix, mPaint);

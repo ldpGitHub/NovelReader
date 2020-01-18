@@ -28,7 +28,7 @@ import hugo.weaving.DebugLog;
  */
 public class PageView extends View {
 
-    private final static String TAG = "BookPageWidget";
+    private final static String TAG = "PageView";
 
     private int mViewWidth = 0; // 当前View的宽
     private int mViewHeight = 0; // 当前View的高
@@ -74,14 +74,14 @@ public class PageView extends View {
         Log.d(TAG,"+PageView");
     }
 
+    @DebugLog
     public PageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
-        Log.d(TAG,"+PageView1");
     }
 
+    @DebugLog
     public PageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        Log.d(TAG,"+PageView2");
     }
 
     @DebugLog
@@ -197,6 +197,7 @@ public class PageView extends View {
     public void setBgColor(int color) {
         mBgColor = color;
     }
+
 
     @Override
     protected void onDraw(Canvas canvas) {

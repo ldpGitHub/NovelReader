@@ -133,8 +133,13 @@ public class ReadPresenter extends RxPresenter<ReadContract.View>
 
     }
 
+    /**
+     * 未使用
+     * @param bookId
+     */
     @Deprecated
     @Override
+
     public void loadCategoryInBiquge(String bookId) {
 
         CollBookBean bean = BookRepository.getInstance().getCollBook(bookId);

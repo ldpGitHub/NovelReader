@@ -91,6 +91,7 @@ public class SystemBarUtils {
         activity.getWindow().setNavigationBarColor(color);
     }
 
+
     /**
      * 视图扩充到StatusBar
      */

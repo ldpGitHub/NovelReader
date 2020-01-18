@@ -244,13 +244,10 @@ public class CollBookBean implements Parcelable{
 
     public List<BookChapterBean> getBookChapters(){
         if (daoSession == null){
-//            Log.d("+Coll1息","发送" +bookChapterList.size());
             return bookChapterList;
         }
         else {
             List<BookChapterBean> list = getBookChapterList();
-//            Log.d("+Coll2息","发送" + list.size() +list.get(100).getLink());
-
             return list;
         }
     }

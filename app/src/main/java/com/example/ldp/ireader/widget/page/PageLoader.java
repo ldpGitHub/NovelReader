@@ -609,7 +609,7 @@ protected boolean isInit = false;
      */
     @DebugLog
     public synchronized void openChapter() {
-        Log.e(TAG,"+openChapter" );
+        Log.e(TAG,"+openChapter + 打开章节" );
 //           if(isInit)
         isFirstOpen = false;
 
@@ -621,7 +621,7 @@ protected boolean isInit = false;
         if (!isChapterListPrepare) {
             mStatus = STATUS_LOADING;
             mPageView.drawCurPage(false);
-            Log.e("+章节目录没有准备好","parseCurChapter");
+            Log.e(TAG,"+章节目录没有准备好 parseCurChapter");
             return;
         }
 
@@ -630,14 +630,14 @@ protected boolean isInit = false;
             mStatus = STATUS_CATEGORY_EMPTY;
             mPageView.drawCurPage(false);
             isInit = true;
-            Log.e("+如果获取到的章节目录为空","parseCurChapter");
+            Log.e(TAG,"+如果获取到的章节目录为空"+"parseCurChapter");
 
             return;
         }
-        Log.e("+打开章节调用前","parseCurChapter");
+        Log.e(TAG,"+打开章节调用前"+"parseCurChapter");
 
         if (parseCurChapter()) {
-            Log.e("+打开章节","openChapter");
+            Log.e(TAG,"+打开章节"+"openChapter");
 
             // 如果章节从未打开
             if (!isChapterOpen) {
@@ -712,8 +712,8 @@ protected boolean isInit = false;
      * @param chapterPos:章节序号
      * @return
      */
+    @DebugLog
     private List<TxtPage> loadPageList(int chapterPos) throws Exception {
-        Log.d(TAG,"loadPageList" );
 
         // 获取章节
         TxtChapter chapter = mChapterList.get(chapterPos);
@@ -723,6 +723,7 @@ protected boolean isInit = false;
             return null;
         }
         // 获取章节的文本流
+        Log.d(TAG, "获取章节的文本流: ");
         BufferedReader reader = getChapterReader(chapter);
         List<TxtPage> chapters = loadPages(chapter, reader);
 
@@ -1100,18 +1101,12 @@ protected boolean isInit = false;
     }
 
     @DebugLog
-    synchronized  boolean   parseCurChapter() {
-        Log.e(TAG,"parseCurChapter" );
-
+    synchronized boolean parseCurChapter() {
+        Log.e(TAG, "parseCurChapter");
         // 解析数据
         dealLoadPageList(mCurChapterPos);
         // 预加载下一页面
-
-            preLoadNextChapter();
-
-
-
-
+        preLoadNextChapter();
         return mCurPageList != null ? true : false;
     }
 
@@ -1157,14 +1152,14 @@ protected boolean isInit = false;
                     page.lines = new ArrayList<>(1);
                     mCurPageList.add(page);
                 } else {
-                    Log.e("+完成","STATUS_FINISH");
+                    Log.e(TAG,"+完成"+"STATUS_FINISH");
                     mStatus = STATUS_FINISH;
                     isInit = true;
 
                 }
             } else {
                 mStatus = STATUS_LOADING;
-                Log.e("+加载中","STATUS_LOADING");
+                Log.e(TAG,"+加载中"+"STATUS_LOADING");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1174,7 +1169,7 @@ protected boolean isInit = false;
         }
 
         // 回调
-        Log.e("+回调","STATUS_FINISH");
+        Log.e(TAG,"+回调"+"STATUS_FINISH");
         chapterChangeCallback();
     }
 
@@ -1312,6 +1307,7 @@ protected boolean isInit = false;
         String paragraph = chapter.getTitle();//默认展示标题
         try {
             while (showTitle || (paragraph = br.readLine()) != null) {
+//                Log.d(TAG, "loadPages: " +paragraph);
                 paragraph = StringUtils.convertCC(paragraph, mContext);
                 // 重置段落
                 if (!showTitle) {

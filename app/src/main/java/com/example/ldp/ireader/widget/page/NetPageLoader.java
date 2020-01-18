@@ -26,7 +26,7 @@ import hugo.weaving.DebugLog;
  */
 
 public class NetPageLoader extends PageLoader {
-    private static final String TAG = "PageFactory";
+    private static final String TAG = "NetPageLoader";
 
     public NetPageLoader(PageView pageView, CollBookBean collBook) {
         super(pageView, collBook);
@@ -64,7 +64,7 @@ public class NetPageLoader extends PageLoader {
         // 如果章节未打开
         if (!isChapterOpen()) {
             // 打开章节
-            Log.e(TAG,"+refreshChapterList" );
+            Log.e(TAG,"+章节未打开" );
 
             openChapter();
         }
@@ -106,7 +106,7 @@ public class NetPageLoader extends PageLoader {
     @DebugLog
     @Override
     boolean parseCurChapter() {
-        Log.d("+打开章节NetPage", "parseCurChapter");
+        Log.d(TAG,"+打开章节NetPage"+ "parseCurChapter");
 
         boolean isRight = super.parseCurChapter();
 
@@ -155,7 +155,6 @@ public class NetPageLoader extends PageLoader {
      */
     @DebugLog
    synchronized private void loadCurrentChapter() {
-        Log.e(TAG,"+NetloadCurrentChapter");
         if (mPageChangeListener != null) {
             int begin = mCurChapterPos;
             int end = mCurChapterPos;

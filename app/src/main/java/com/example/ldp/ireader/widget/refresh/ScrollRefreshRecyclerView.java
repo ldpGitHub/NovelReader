@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 public class ScrollRefreshRecyclerView extends ScrollRefreshLayout {
 
-    private static final String TAG = "ScrollRefreshRecyclerView";
+    private static final String TAG = ScrollRefreshRecyclerView.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
 
